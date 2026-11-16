@@ -1,0 +1,13 @@
+{
+  "itemGroup.industria": "Example Mod Tab",
+  "block.industria.example_block": "Example Block",
+  "item.industria.example_item": "Example Item",
+
+  "industria.configuration.title": "Industria Configs",
+  "industria.configuration.section.industria.common.toml": "Industria Configs",
+  "industria.configuration.section.industria.common.toml.title": "Industria Configs",
+  "industria.configuration.items": "Item List",
+  "industria.configuration.logDirtBlock": "Log Dirt Block",
+  "industria.configuration.magicNumberIntroduction": "Magic Number Text",
+  "industria.configuration.magicNumber": "Magic Number"
+}
