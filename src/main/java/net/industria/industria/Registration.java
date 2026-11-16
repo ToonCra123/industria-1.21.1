@@ -2,12 +2,17 @@ package net.industria.industria;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
@@ -22,6 +27,25 @@ public class Registration {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, MODID);
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
 
+
+    // Blocks
+
+    // Block Items
+
+    // Block Entities
+
+    //Items
+    public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INDUSTRIA_TAB = CREATIVE_MODE_TABS.register("industria_tab", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.industria"))
+            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .icon(() -> STEEL_INGOT.get().getDefaultInstance())
+            .displayItems((parameters, output) -> {
+                output.accept(STEEL_INGOT.get());
+            }
+            ).build());//The language key for the title of your CreativeModeTab
 
     public static void init(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

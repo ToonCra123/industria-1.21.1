@@ -1,5 +1,6 @@
 package net.industria.industria;
 
+import net.industria.industria.datagen.IndustriaDatagen;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -16,9 +17,10 @@ public class Industria {
 
 
     public Industria(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::commonSetup);
-
         Registration.init(modEventBus);
+
+        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(IndustriaDatagen::generate);
 
         modEventBus.register(IndustriaClient.class);
     }
