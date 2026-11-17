@@ -16,6 +16,8 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 
 public class CokeBrickBlockEntity extends BlockEntity {
+    public boolean is_controller = false;
+
     public static final String ITEMS_TAG = "Inventory";
 
     private ItemStackHandler items = createItemHandler();
