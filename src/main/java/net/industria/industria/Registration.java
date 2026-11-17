@@ -1,5 +1,7 @@
 package net.industria.industria;
 
+import net.industria.industria.common.block.CokeBrickBlock;
+import net.industria.industria.common.blockentities.CokeBrickBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,6 +19,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.*;
 
+import java.util.function.Supplier;
+
 import static net.industria.industria.Industria.MODID;
 
 public class Registration {
@@ -30,7 +34,7 @@ public class Registration {
 
 
     // Blocks
-    public static final DeferredBlock<Block> COKE_BRICK = BLOCKS.registerBlock("coke_brick", Block::new,
+    public static final DeferredBlock<CokeBrickBlock> COKE_BRICK = BLOCKS.registerBlock("coke_brick", CokeBrickBlock::new,
             BlockBehaviour.Properties.of().sound(SoundType.DEEPSLATE_BRICKS).explosionResistance(6.0f).strength(2.0f));
 
     // Block Items
@@ -38,6 +42,8 @@ public class Registration {
             () -> new BlockItem(COKE_BRICK.get(), new Item.Properties()));
 
     // Block Entities
+    public static final Supplier<BlockEntityType<CokeBrickBlockEntity>> COKE_BRICK_BLOCK_ENTITY = BLOCK_ENTITIES.register("coke_brick_block_entity",
+            () -> BlockEntityType.Builder.of(CokeBrickBlockEntity::new, COKE_BRICK.get()).build(null));
 
     // Items
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
