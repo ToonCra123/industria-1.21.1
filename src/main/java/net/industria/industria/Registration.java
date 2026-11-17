@@ -2,6 +2,7 @@ package net.industria.industria;
 
 import net.industria.industria.common.block.CokeBrickBlock;
 import net.industria.industria.common.blockentities.CokeBrickBlockEntity;
+import net.industria.industria.common.container.CokeOvenContainer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.*;
 
 import java.util.function.Supplier;
@@ -44,6 +46,12 @@ public class Registration {
     // Block Entities
     public static final Supplier<BlockEntityType<CokeBrickBlockEntity>> COKE_BRICK_BLOCK_ENTITY = BLOCK_ENTITIES.register("coke_brick_block_entity",
             () -> BlockEntityType.Builder.of(CokeBrickBlockEntity::new, COKE_BRICK.get()).build(null));
+
+    // menus
+    public static final Supplier<MenuType<CokeOvenContainer>> COKE_OVEN_CONTAINER = MENU_TYPES.register("coke_brick_block",
+            () -> IMenuTypeExtension.create((windowId, inv, data) -> new CokeOvenContainer(windowId, inv.player, data.readBlockPos())));
+
+
 
     // Items
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
