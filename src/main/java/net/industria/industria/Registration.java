@@ -5,16 +5,17 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.*;
 
 import static net.industria.industria.Industria.MODID;
 
@@ -29,12 +30,16 @@ public class Registration {
 
 
     // Blocks
+    public static final DeferredBlock<Block> COKE_BRICK = BLOCKS.registerBlock("coke_brick", Block::new,
+            BlockBehaviour.Properties.of().sound(SoundType.DEEPSLATE_BRICKS).explosionResistance(6.0f).strength(2.0f));
 
     // Block Items
+    public static final DeferredItem<BlockItem> COKE_BRICK_ITEM = ITEMS.register("coke_brick",
+            () -> new BlockItem(COKE_BRICK.get(), new Item.Properties()));
 
     // Block Entities
 
-    //Items
+    // Items
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
             () -> new Item(new Item.Properties()));
 
@@ -44,8 +49,10 @@ public class Registration {
             .icon(() -> STEEL_INGOT.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(STEEL_INGOT.get());
+
+                output.accept(COKE_BRICK_ITEM.get());
             }
-            ).build());//The language key for the title of your CreativeModeTab
+            ).build());
 
     public static void init(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

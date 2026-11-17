@@ -14,7 +14,7 @@ public class IndustriaDatagen {
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        //generator.addProvider(event.includeClient(), new MykullBlockState(packOutput, event.getExistingFileHelper()));
+        generator.addProvider(event.includeClient(), new IndustriaBlockModels(packOutput, event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new IndustriaItemModels(packOutput, event.getExistingFileHelper()));
     }
 }
