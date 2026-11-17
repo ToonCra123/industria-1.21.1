@@ -13,8 +13,8 @@ public class CokeOvenScreen extends AbstractContainerScreen<CokeOvenContainer> {
 
     public CokeOvenScreen(CokeOvenContainer menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageHeight = 152;
-        this.imageWidth = 180;
+        this.imageHeight = 166;
+        this.imageWidth = 176;
         this.inventoryLabelY = this.imageHeight - 96;
     }
 

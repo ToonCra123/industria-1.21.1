@@ -9,10 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
-import static net.industria.industria.common.blockentities.CokeBrickBlockEntity.IO_1_SLOT;
-import static net.industria.industria.common.blockentities.CokeBrickBlockEntity.SLOT_COUNT;
+import static net.industria.industria.common.blockentities.CokeBrickBlockEntity.*;
 
 public class CokeOvenContainer extends AbstractContainerMenu {
     private final BlockPos pos;
@@ -21,9 +19,12 @@ public class CokeOvenContainer extends AbstractContainerMenu {
         super(Registration.COKE_OVEN_CONTAINER.get(), windowId);
         this.pos = pos;
         if (player.level().getBlockEntity(pos) instanceof CokeBrickBlockEntity oven) {
-            addSlot(new SlotItemHandler(oven.getItems(), IO_1_SLOT, 56, 25));
+            addSlot(new SlotItemHandler(oven.getItems(), IO_1_SLOT, 46, 16));
+            addSlot(new SlotItemHandler(oven.getItems(), IO_2_SLOT, 64, 16));
+            addSlot(new SlotItemHandler(oven.getItems(), FUEL_SLOT, 56, 53));
+            addSlot(new SlotItemHandler(oven.getItems(), OUTPUT_SLOT, 115, 35));
         }
-        layoutPlayerInventorySlots(player.getInventory(), 10, 70);
+        layoutPlayerInventorySlots(player.getInventory(), 8, 84);
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {
