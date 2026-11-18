@@ -16,6 +16,7 @@ public class IndustriaItemModels extends ItemModelProvider {
     protected void registerModels() {
         // Items
         basicItem(Registration.STEEL_INGOT.get());
+        basicItem(Registration.WRENCH.get());
 
         // Block Items
         withExistingParent(Registration.COKE_BRICK.getId().getPath(), modLoc("block/coke_brick"));

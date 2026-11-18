@@ -3,15 +3,13 @@ package net.industria.industria;
 import net.industria.industria.common.block.CokeBrickBlock;
 import net.industria.industria.common.blockentities.CokeBrickBlockEntity;
 import net.industria.industria.common.container.CokeOvenContainer;
+import net.industria.industria.common.item.WrenchItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -56,6 +54,8 @@ public class Registration {
     // Items
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
             () -> new Item(new Item.Properties()));
+    public static final DeferredItem<WrenchItem> WRENCH = ITEMS.register("wrench",
+            () -> new WrenchItem(new Item.Properties()));
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INDUSTRIA_TAB = CREATIVE_MODE_TABS.register("industria_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.industria"))
@@ -63,6 +63,7 @@ public class Registration {
             .icon(() -> STEEL_INGOT.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(STEEL_INGOT.get());
+                output.accept(WRENCH.get());
 
                 output.accept(COKE_BRICK_ITEM.get());
             }
