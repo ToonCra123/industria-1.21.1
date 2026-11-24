@@ -1,7 +1,7 @@
 package net.industria.industria.common.container;
 
 import net.industria.industria.Registration;
-import net.industria.industria.common.blockentities.CokeBrickBlockEntity;
+import net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,7 +10,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-import static net.industria.industria.common.blockentities.CokeBrickBlockEntity.*;
+import static net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockController.*;
 
 public class CokeOvenContainer extends AbstractContainerMenu {
     private final BlockPos pos;
@@ -18,7 +18,7 @@ public class CokeOvenContainer extends AbstractContainerMenu {
     public CokeOvenContainer(int windowId, Player player, BlockPos pos) {
         super(Registration.COKE_OVEN_CONTAINER.get(), windowId);
         this.pos = pos;
-        if (player.level().getBlockEntity(pos) instanceof CokeBrickBlockEntity oven) {
+        if (player.level().getBlockEntity(pos) instanceof CokeOvenMultiblockController oven) {
             addSlot(new SlotItemHandler(oven.getItems(), IO_1_SLOT, 46, 16));
             addSlot(new SlotItemHandler(oven.getItems(), IO_2_SLOT, 64, 16));
             addSlot(new SlotItemHandler(oven.getItems(), FUEL_SLOT, 56, 53));
@@ -93,6 +93,10 @@ public class CokeOvenContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(player.level(), pos), player, Registration.COKE_BRICK.get());
+        return stillValid(
+                ContainerLevelAccess.create(player.level(), pos),
+                player,
+                Registration.COKE_OVEN_CONTROLLER_BLOCK.get()
+        );
     }
 }

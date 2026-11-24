@@ -1,32 +1,15 @@
 package net.industria.industria.common.block;
 
-import net.industria.industria.client.screen.CokeOvenScreen;
-import net.industria.industria.common.blockentities.CokeBrickBlockEntity;
-import net.industria.industria.common.container.CokeOvenContainer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.Nullable;
 
-public class CokeBrickBlock extends Block implements EntityBlock {
+public class CokeBrickBlock extends Block {
     public static final String SCREEN_COKE_OVEN = "industria.screen.coke_oven";
 
     public CokeBrickBlock(Properties properties) {
         super(properties);
     }
 
+    /*
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CokeBrickBlockEntity(pos, state);
@@ -72,4 +55,5 @@ public class CokeBrickBlock extends Block implements EntityBlock {
         }
         return InteractionResult.SUCCESS;
     }
+    */
 }
