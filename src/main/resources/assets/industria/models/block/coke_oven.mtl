@@ -1,7 +1,4 @@
-newmtl casing
-Kd 1 1 1
-map_Kd industria:block/coke_oven_block
-
-newmtl front
-Kd 1 1 1
-map_Kd industria:block/coke_oven_controller
+# Made in Blockbench 5.2.1
+newmtl m_3e0678f4-2c6c-461d-3758-9b282daed289
+map_Kd industria:multiblock/coke/texture
+newmtl none

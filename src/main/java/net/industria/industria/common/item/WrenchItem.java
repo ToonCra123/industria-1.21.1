@@ -21,7 +21,7 @@ public class WrenchItem extends Item {
 
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        Direction dir = context.getHorizontalDirection();
+        Direction dir = context.getClickedFace();
 
         BlockPos origin = CokeOvenMultiblockFormer.FORMER
                 .findOrigin(level, pos);

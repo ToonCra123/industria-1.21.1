@@ -33,17 +33,21 @@ public final class SplitBakedModel extends BakedModelWrapper<BakedModel> {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource random,
                                    ModelData modelData, @Nullable RenderType renderType) {
-        if (state == null) {
-            return super.getQuads(null, side, random, modelData, renderType);
+        BlockPos offset = modelData.get(MultiblockModelProperties.RELATIVE_POS);
+
+        if (offset == null) {
+            offset = BlockPos.ZERO;
         }
 
-        BlockPos offset = modelData.get(MultiblockModelProperties.RELATIVE_POS);
-        if (offset == null || (renderType != null && !getRenderTypes(state, random, modelData).contains(renderType))) {
+        if (renderType != null &&
+                !getRenderTypes(state, random, modelData).contains(renderType)) {
             return List.of();
         }
 
-        Direction facing = state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)
-                ? state.getValue(BlockStateProperties.HORIZONTAL_FACING) : Direction.NORTH;
+        Direction facing = state != null &&
+                state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)
+                ? state.getValue(BlockStateProperties.HORIZONTAL_FACING)
+                : Direction.NORTH;
         ModelSplitter.Section section = sections.get(facing).get(offset);
         return section == null ? List.of() : section.getQuads(side);
     }

@@ -86,16 +86,12 @@ public class CokeOvenMultiblockFormer {
         }
 
         if (dir.getAxis().isVertical()) {
-            Industria.LOGGER.warn("Invalid direction");
             return false;
         }
 
         if (!isValidStructure(world, origin)) {
-            Industria.LOGGER.warn("Invalid structure at {}", origin);
             return false;
         }
-
-        Industria.LOGGER.info("Forming coke oven at {}", origin);
 
         // Place controller
         boolean placed = world.setBlock(
@@ -107,7 +103,6 @@ public class CokeOvenMultiblockFormer {
         );
 
         if (!placed) {
-            Industria.LOGGER.error("Failed to place controller");
             return false;
         }
 
@@ -119,8 +114,6 @@ public class CokeOvenMultiblockFormer {
             );
             return false;
         }
-
-        Industria.LOGGER.info("Controller created successfully");
 
         // Place dummy blocks
         for (BlockPos pos : controller.getBlocksInMultiblock()) {
@@ -138,7 +131,6 @@ public class CokeOvenMultiblockFormer {
             );
 
             if (!dummyPlaced) {
-                Industria.LOGGER.error("Failed to place dummy at {}", pos);
                 return false;
             }
 
@@ -153,12 +145,9 @@ public class CokeOvenMultiblockFormer {
 
             dummy.setControllerPos(origin);
 
-            Industria.LOGGER.info("Dummy created at {}", pos);
         }
 
         controller.setChanged();
-
-        Industria.LOGGER.info("Coke oven formed successfully");
 
         return true;
     }
