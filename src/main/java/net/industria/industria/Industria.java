@@ -1,6 +1,8 @@
 package net.industria.industria;
 
+import net.industria.industria.compat.TOPCompat;
 import net.industria.industria.datagen.IndustriaDatagen;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -19,6 +21,8 @@ public class Industria {
     public Industria(IEventBus modEventBus, ModContainer modContainer) {
         Registration.init(modEventBus);
 
+        modEventBus.addListener(this::enqueueIMC);
+
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(IndustriaDatagen::generate);
     }
@@ -28,4 +32,8 @@ public class Industria {
     private void commonSetup(FMLCommonSetupEvent event) {
     }
 
+
+    private void enqueueIMC(InterModEnqueueEvent event) {
+        TOPCompat.register();
+    }
 }

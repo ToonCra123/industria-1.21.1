@@ -1,6 +1,6 @@
 {
   "loader": "industria:split",
-  "model": "industria:models/block/coke_oven.obj",
+  "model": "industria:models/multiblock/coke_oven.obj",
   "size": [2, 2, 2],
   "render_type": "minecraft:solid",
   "flip_v": true,

@@ -72,6 +72,11 @@ public class Registration {
     public static final DeferredItem<WrenchItem> WRENCH = ITEMS.register("wrench",
             () -> new WrenchItem(new Item.Properties()));
 
+    // Displays for MB
+    public static final DeferredItem<Item> BLAST_FURNACE_DISPLAY =
+            ITEMS.register("coke_oven_display",
+                    () -> new Item(new Item.Properties()));
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INDUSTRIA_TAB = CREATIVE_MODE_TABS.register("industria_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.industria"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
