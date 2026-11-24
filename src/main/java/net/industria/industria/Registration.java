@@ -51,11 +51,11 @@ public class Registration {
 
     // Multiblock Blocks
     public static final DeferredBlock<CokeOvenControllerBlock> COKE_OVEN_CONTROLLER_BLOCK = BLOCKS.registerBlock("coke_oven_controller", CokeOvenControllerBlock::new,
-            BlockBehaviour.Properties.of().strength(2.0f));
+            BlockBehaviour.Properties.of().strength(2.0f).noOcclusion());
     public static final Supplier<BlockEntityType<CokeOvenMultiblockController>> COKE_OVEN_CONTROLLER_BLOCK_ENTITY = BLOCK_ENTITIES.register("coke_oven_controller_block_entity",
             () -> BlockEntityType.Builder.of(CokeOvenMultiblockController::new, COKE_OVEN_CONTROLLER_BLOCK.get()).build(null));
     public static final DeferredBlock<CokeOvenBlock> COKE_OVEN_BLOCK = BLOCKS.registerBlock("coke_oven_block", CokeOvenBlock::new,
-            BlockBehaviour.Properties.of().strength(2.0f));
+            BlockBehaviour.Properties.of().strength(2.0f).noOcclusion());
     public static final Supplier<BlockEntityType<CokeOvenMultiblockDummy>> COKE_OVEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("coke_oven_dummy_block_entity",
             () -> BlockEntityType.Builder.of(CokeOvenMultiblockDummy::new, COKE_OVEN_BLOCK.get()).build(null));
 

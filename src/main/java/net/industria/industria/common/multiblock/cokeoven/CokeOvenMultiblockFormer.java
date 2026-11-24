@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class CokeOvenMultiblockFormer {
 
@@ -23,7 +24,6 @@ public class CokeOvenMultiblockFormer {
      * Finds the origin of a valid 2x2x2 coke oven.
      *
      * @param world The world
-     * @param dir   Direction the multiblock faces
      * @param pos   Any block position within the structure
      * @return The origin, or null if no valid structure exists
      */
@@ -101,7 +101,8 @@ public class CokeOvenMultiblockFormer {
         boolean placed = world.setBlock(
                 origin,
                 Registration.COKE_OVEN_CONTROLLER_BLOCK.get()
-                        .defaultBlockState(),
+                        .defaultBlockState()
+                        .setValue(BlockStateProperties.HORIZONTAL_FACING, dir),
                 Block.UPDATE_ALL
         );
 
@@ -131,7 +132,8 @@ public class CokeOvenMultiblockFormer {
             boolean dummyPlaced = world.setBlock(
                     pos,
                     Registration.COKE_OVEN_BLOCK.get()
-                            .defaultBlockState(),
+                            .defaultBlockState()
+                            .setValue(BlockStateProperties.HORIZONTAL_FACING, dir),
                     Block.UPDATE_ALL
             );
 

@@ -1,0 +1,7 @@
+newmtl casing
+Kd 1 1 1
+map_Kd industria:block/coke_oven_block
+
+newmtl front
+Kd 1 1 1
+map_Kd industria:block/coke_oven_controller

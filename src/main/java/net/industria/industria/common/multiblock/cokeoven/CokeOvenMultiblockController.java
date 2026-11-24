@@ -1,14 +1,15 @@
 package net.industria.industria.common.multiblock.cokeoven;
 
 import net.industria.industria.Registration;
+import net.industria.industria.common.multiblock.MultiblockModelProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -53,6 +54,11 @@ public class CokeOvenMultiblockController extends BlockEntity {
 
     public BlockPos getRelativePos() {
         return BlockPos.ZERO;
+    }
+
+    @Override
+    public ModelData getModelData() {
+        return MultiblockModelProperties.forOffset(getRelativePos());
     }
 
     public void tickServer() {

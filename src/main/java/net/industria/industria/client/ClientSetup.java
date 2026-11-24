@@ -1,11 +1,13 @@
 package net.industria.industria.client;
 
 import net.industria.industria.Registration;
+import net.industria.industria.client.model.SplitModelLoader;
 import net.industria.industria.client.screen.CokeOvenScreen;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 import static net.industria.industria.Industria.MODID;
@@ -19,8 +21,8 @@ public class ClientSetup {
     }
 
     @SubscribeEvent
-    public static void initClient(EntityRenderersEvent.RegisterRenderers event) {
-
+    public static void registerModelLoaders(ModelEvent.RegisterGeometryLoaders event) {
+        event.register(ResourceLocation.fromNamespaceAndPath(MODID, "split"), new SplitModelLoader());
     }
 
 }

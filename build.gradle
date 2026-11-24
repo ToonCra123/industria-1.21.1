@@ -180,6 +180,25 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+// Geometry tests run on the normal JVM with the game's model classes.
+def modelTest = sourceSets.create('modelTest') {
+    compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    runtimeClasspath += sourceSets.main.runtimeClasspath
+}
+
+def splitModelTest = tasks.register('splitModelTest', JavaExec) {
+    group = 'verification'
+    description = 'Tests split OBJ geometry and rotation without launching Minecraft.'
+    workingDir = layout.buildDirectory.get().asFile
+    classpath = modelTest.runtimeClasspath
+    mainClass = 'net.industria.industria.client.model.ModelSplitterTest'
+    javaLauncher = javaToolchains.launcherFor(java.toolchain)
+}
+
+tasks.named('check') {
+    dependsOn splitModelTest
+}
+
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {
     module {

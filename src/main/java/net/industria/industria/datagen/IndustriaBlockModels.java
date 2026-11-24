@@ -14,7 +14,8 @@ public class IndustriaBlockModels extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlock(Registration.COKE_BRICK.get());
-        simpleBlock(Registration.COKE_OVEN_BLOCK.get());
-        simpleBlock(Registration.COKE_OVEN_CONTROLLER_BLOCK.get());
+        var cokeOvenModel = models().getExistingFile(modLoc("block/coke_oven"));
+        simpleBlock(Registration.COKE_OVEN_BLOCK.get(), cokeOvenModel);
+        simpleBlock(Registration.COKE_OVEN_CONTROLLER_BLOCK.get(), cokeOvenModel);
     }
 }

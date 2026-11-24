@@ -21,8 +21,6 @@ public class Industria {
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(IndustriaDatagen::generate);
-
-        modEventBus.register(IndustriaClient.class);
     }
 
 
