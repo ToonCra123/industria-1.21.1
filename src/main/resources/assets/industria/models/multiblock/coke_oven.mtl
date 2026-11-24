@@ -1,4 +1,4 @@
-# Made in Blockbench 5.2.1
-newmtl m_94af0b86-a85c-2671-d41b-14d59a9a74b0
-map_Kd industria:multiblock/coke/texture
+# Made in Blockbench 5.2.2
+newmtl m_e0a77ec9-7c47-b719-561a-94a3b06b71b1
+map_Kd industria:multiblock/coke/coke_oven_texture
 newmtl none
