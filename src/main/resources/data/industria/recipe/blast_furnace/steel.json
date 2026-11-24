@@ -1,0 +1,16 @@
+{
+  "type": "industria:blast_furnace",
+  "primary": {
+    "item": "minecraft:iron_ingot"
+  },
+  "secondary": {
+    "item": "minecraft:coal"
+  },
+  "primary_count": 1,
+  "secondary_count": 2,
+  "result": {
+    "id": "industria:steel_ingot",
+    "count": 1
+  },
+  "processing_time": 200
+}

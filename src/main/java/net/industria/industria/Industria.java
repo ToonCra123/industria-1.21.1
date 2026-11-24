@@ -36,4 +36,5 @@ public class Industria {
     private void enqueueIMC(InterModEnqueueEvent event) {
         TOPCompat.register();
     }
+
 }

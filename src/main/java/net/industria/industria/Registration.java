@@ -7,12 +7,16 @@ import net.industria.industria.common.multiblock.cokeoven.CokeOvenBlock;
 import net.industria.industria.common.multiblock.cokeoven.CokeOvenControllerBlock;
 import net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockController;
 import net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockDummy;
+import net.industria.industria.common.recipe.blast.BlastFurnaceRecipe;
+import net.industria.industria.common.recipe.blast.BlastFurnaceRecipeSerializer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,6 +37,16 @@ public class Registration {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, MODID);
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
+            DeferredRegister.create(
+                    Registries.RECIPE_TYPE,
+                    Industria.MODID
+            );
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(
+                    Registries.RECIPE_SERIALIZER,
+                    Industria.MODID
+            );
 
 
     // Blocks
@@ -77,6 +91,17 @@ public class Registration {
             ITEMS.register("coke_oven_display",
                     () -> new Item(new Item.Properties()));
 
+    // Recipes Types
+    public static final Supplier<RecipeType<BlastFurnaceRecipe>>
+            BLAST_FURNACE_RECIPE_TYPE =
+            RECIPE_TYPES.register("blast_furnace",
+                    () -> new RecipeType<BlastFurnaceRecipe>() {});
+
+    public static final Supplier<RecipeSerializer<BlastFurnaceRecipe>>
+            BLAST_FURNACE_RECIPE_SERIALIZER =
+            RECIPE_SERIALIZERS.register("blast_furnace",
+                    BlastFurnaceRecipeSerializer::new);
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INDUSTRIA_TAB = CREATIVE_MODE_TABS.register("industria_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.industria"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
@@ -97,5 +122,7 @@ public class Registration {
         MENU_TYPES.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         ATTACHMENTS.register(modEventBus);
+        RECIPE_SERIALIZERS.register(modEventBus);
+        RECIPE_TYPES.register(modEventBus);
     }
 }

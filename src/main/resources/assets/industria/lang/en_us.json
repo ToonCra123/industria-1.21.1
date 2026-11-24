@@ -1,5 +1,5 @@
 {
-  "itemGroup.industria": "Example Mod Tab",
+  "itemGroup.industria": "Industria",
   "block.industria.example_block": "Example Block",
   "item.industria.example_item": "Example Item",
 
@@ -9,5 +9,17 @@
   "industria.configuration.items": "Item List",
   "industria.configuration.logDirtBlock": "Log Dirt Block",
   "industria.configuration.magicNumberIntroduction": "Magic Number Text",
-  "industria.configuration.magicNumber": "Magic Number"
+  "industria.configuration.magicNumber": "Magic Number",
+
+  "item.industria.steel_ingot": "Steel Ingot",
+
+  "item.industria.wrench": "Working Wrench",
+
+  "block.industria.coke_brick": "Blast Brick",
+  "block.industria.coke_oven_controller": "Blast Furnace",
+  "block.industria.coke_oven_blockr": "Blast Furnace",
+  "industria.screen.coke_oven": "Blast Furnace",
+  "item.industria.blast_furnace_display": "Blast Furnace"
+
+
 }
