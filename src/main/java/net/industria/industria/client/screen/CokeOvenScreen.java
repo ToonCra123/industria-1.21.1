@@ -21,6 +21,7 @@ public class CokeOvenScreen extends AbstractContainerScreen<CokeOvenContainer> {
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         graphics.blit(GUI, leftPos, topPos, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.blit(GUI, leftPos+79, topPos+35, 0, 166, this.menu.getScaledProgress(22), 14);
     }
 
     @Override

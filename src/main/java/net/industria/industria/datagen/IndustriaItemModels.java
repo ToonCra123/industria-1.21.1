@@ -17,8 +17,12 @@ public class IndustriaItemModels extends ItemModelProvider {
         // Items
         basicItem(Registration.STEEL_INGOT.get());
         basicItem(Registration.WRENCH.get());
+        basicItem(Registration.SILVER_INGOT.get());
 
         // Block Items
         withExistingParent(Registration.COKE_BRICK.getId().getPath(), modLoc("block/coke_brick"));
+        withExistingParent(Registration.STEEL_SCAFFOLDING.getId().getPath(), modLoc("block/steel_scaffolding"));
+        withExistingParent(Registration.STEEL_BLOCK.getId().getPath(), modLoc("block/steel_block"));
+        withExistingParent(Registration.SILVER_ORE.getId().getPath(), modLoc("block/silver_ore"));
     }
 }

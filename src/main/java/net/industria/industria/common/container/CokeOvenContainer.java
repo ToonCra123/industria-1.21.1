@@ -10,10 +10,17 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
+import java.util.function.IntSupplier;
+
 import static net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockController.*;
 
 public class CokeOvenContainer extends AbstractContainerMenu {
     private final BlockPos pos;
+
+    private DataSlot progress;
+    private DataSlot maxProgress;
+    private DataSlot burnTime;
+    private DataSlot maxBurnTime;
 
     public CokeOvenContainer(int windowId, Player player, BlockPos pos) {
         super(Registration.COKE_OVEN_CONTAINER.get(), windowId);
@@ -23,6 +30,11 @@ public class CokeOvenContainer extends AbstractContainerMenu {
             addSlot(new SlotItemHandler(oven.getItems(), IO_2_SLOT, 64, 16));
             addSlot(new SlotItemHandler(oven.getItems(), FUEL_SLOT, 56, 53));
             addSlot(new SlotItemHandler(oven.getItems(), OUTPUT_SLOT, 115, 35));
+
+            progress = syncData(player, oven::getProgress);
+            maxProgress = syncData(player, oven::getMaxProgress);
+            burnTime = syncData(player, oven::getBurnTime);
+            maxBurnTime = syncData(player, oven::getMaxBurnTime);
         }
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
     }
@@ -98,5 +110,35 @@ public class CokeOvenContainer extends AbstractContainerMenu {
                 player,
                 Registration.COKE_OVEN_CONTROLLER_BLOCK.get()
         );
+    }
+
+    private DataSlot syncData(Player player, IntSupplier getter) {
+        return addDataSlot(player.level().isClientSide
+                ? DataSlot.standalone()
+                : new DataSlot() {
+            @Override
+            public int get() {
+                return getter.getAsInt();
+            }
+
+            @Override
+            public void set(int value) {}
+        });
+    }
+
+    public int getScaledProgress(int pixels) {
+        return maxProgress.get() > 0
+                ? progress.get() * pixels / maxProgress.get()
+                : 0;
+    }
+
+    public int getScaledBurnTime(int pixels) {
+        return maxBurnTime.get() > 0
+                ? burnTime.get() * pixels / maxBurnTime.get()
+                : 0;
+    }
+
+    public boolean isBurning() {
+        return burnTime.get() > 0;
     }
 }

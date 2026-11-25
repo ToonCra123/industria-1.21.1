@@ -17,6 +17,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -52,10 +53,22 @@ public class Registration {
     // Blocks
     public static final DeferredBlock<CokeBrickBlock> COKE_BRICK = BLOCKS.registerBlock("coke_brick", CokeBrickBlock::new,
             BlockBehaviour.Properties.of().sound(SoundType.DEEPSLATE_BRICKS).explosionResistance(6.0f).strength(2.0f));
+    public static final DeferredBlock<Block> STEEL_SCAFFOLDING = BLOCKS.registerBlock("steel_scaffolding", Block::new,
+            BlockBehaviour.Properties.of().noOcclusion());
+    public static final DeferredBlock<Block> STEEL_BLOCK = BLOCKS.registerBlock("steel_block", Block::new,
+            BlockBehaviour.Properties.of());
+    public static final DeferredBlock<Block> SILVER_ORE = BLOCKS.registerBlock("silver_ore", Block::new,
+            BlockBehaviour.Properties.of());
 
     // Block Items
     public static final DeferredItem<BlockItem> COKE_BRICK_ITEM = ITEMS.register("coke_brick",
             () -> new BlockItem(COKE_BRICK.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> STELL_SCAFFOLDING_ITEM = ITEMS.register("steel_scaffolding",
+            () -> new BlockItem(STEEL_SCAFFOLDING.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> STEEL_BLOCK_ITEM = ITEMS.register("steel_block",
+            () -> new BlockItem(STEEL_BLOCK.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> SILVER_ORE_ITEM = ITEMS.register("silver_ore",
+            () -> new BlockItem(SILVER_ORE.get(), new Item.Properties()));
 
     // Block Entities
     /*
@@ -73,6 +86,10 @@ public class Registration {
     public static final Supplier<BlockEntityType<CokeOvenMultiblockDummy>> COKE_OVEN_BLOCK_ENTITY = BLOCK_ENTITIES.register("coke_oven_dummy_block_entity",
             () -> BlockEntityType.Builder.of(CokeOvenMultiblockDummy::new, COKE_OVEN_BLOCK.get()).build(null));
 
+    // Displays for MB
+    public static final DeferredItem<Item> BLAST_FURNACE_DISPLAY =
+            ITEMS.register("coke_oven_display",
+                    () -> new Item(new Item.Properties()));
 
     // menus
     public static final Supplier<MenuType<CokeOvenContainer>> COKE_OVEN_CONTAINER = MENU_TYPES.register("coke_oven_block",
@@ -83,13 +100,11 @@ public class Registration {
     // Items
     public static final DeferredItem<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
             () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> SILVER_INGOT = ITEMS.register("silver_ingot",
+            () -> new Item(new Item.Properties()));
     public static final DeferredItem<WrenchItem> WRENCH = ITEMS.register("wrench",
             () -> new WrenchItem(new Item.Properties()));
 
-    // Displays for MB
-    public static final DeferredItem<Item> BLAST_FURNACE_DISPLAY =
-            ITEMS.register("coke_oven_display",
-                    () -> new Item(new Item.Properties()));
 
     // Recipes Types
     public static final Supplier<RecipeType<BlastFurnaceRecipe>>
@@ -108,9 +123,13 @@ public class Registration {
             .icon(() -> STEEL_INGOT.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(STEEL_INGOT.get());
+                output.accept(STEEL_BLOCK_ITEM.get());
+                output.accept(SILVER_INGOT.get());
+                output.accept(SILVER_ORE_ITEM.get());
                 output.accept(WRENCH.get());
 
                 output.accept(COKE_BRICK_ITEM.get());
+                output.accept(STELL_SCAFFOLDING_ITEM.get());
             }
             ).build());
 

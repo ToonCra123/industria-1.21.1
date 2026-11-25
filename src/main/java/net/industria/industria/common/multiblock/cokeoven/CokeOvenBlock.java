@@ -64,4 +64,29 @@ public class CokeOvenBlock extends Block implements EntityBlock {
     }
 
 
+    @Override
+    public void onRemove(BlockState state, Level level,
+                         BlockPos pos, BlockState newState,
+                         boolean movedByPiston) {
+
+        if (!state.is(newState.getBlock()) && !level.isClientSide) {
+
+            if (level.getBlockEntity(pos)
+                    instanceof CokeOvenMultiblockDummy dummy) {
+
+                BlockPos controllerPos = dummy.getControllerPos();
+
+                if (controllerPos != null
+                        && level.getBlockEntity(controllerPos)
+                        instanceof CokeOvenMultiblockController controller) {
+
+                    controller.dismantle(pos);
+                }
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+
 }

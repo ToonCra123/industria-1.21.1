@@ -81,11 +81,10 @@ public class CokeOvenMultiblockFormer {
 
     public boolean form(Level world, Direction dir, BlockPos origin) {
 
-        if (world.isClientSide) {
-            return false;
-        }
+        boolean vertical = dir.getAxis().isVertical();
+        Direction direct = vertical ? Direction.NORTH : dir;
 
-        if (dir.getAxis().isVertical()) {
+        if (world.isClientSide) {
             return false;
         }
 
@@ -98,7 +97,7 @@ public class CokeOvenMultiblockFormer {
                 origin,
                 Registration.COKE_OVEN_CONTROLLER_BLOCK.get()
                         .defaultBlockState()
-                        .setValue(BlockStateProperties.HORIZONTAL_FACING, dir),
+                        .setValue(BlockStateProperties.HORIZONTAL_FACING, direct),
                 Block.UPDATE_ALL
         );
 
@@ -126,7 +125,7 @@ public class CokeOvenMultiblockFormer {
                     pos,
                     Registration.COKE_OVEN_BLOCK.get()
                             .defaultBlockState()
-                            .setValue(BlockStateProperties.HORIZONTAL_FACING, dir),
+                            .setValue(BlockStateProperties.HORIZONTAL_FACING, direct),
                     Block.UPDATE_ALL
             );
 

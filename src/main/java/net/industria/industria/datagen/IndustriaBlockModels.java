@@ -17,5 +17,19 @@ public class IndustriaBlockModels extends BlockStateProvider {
         var cokeOvenModel = models().getExistingFile(modLoc("block/coke_oven"));
         simpleBlock(Registration.COKE_OVEN_BLOCK.get(), cokeOvenModel);
         simpleBlock(Registration.COKE_OVEN_CONTROLLER_BLOCK.get(), cokeOvenModel);
+        simpleBlock(Registration.STEEL_BLOCK.get());
+        simpleBlock(Registration.SILVER_ORE.get());
+
+        var scaffoldingModel = models().cubeBottomTop(
+                "steel_scaffolding",
+                modLoc("block/steel_scaffolding_side"),
+                modLoc("block/steel_scaffolding_top"),
+                modLoc("block/steel_scaffolding_top")
+        ).renderType("minecraft:cutout");
+        simpleBlockWithItem(
+                Registration.STEEL_SCAFFOLDING.get(),
+                scaffoldingModel
+        );
+
     }
 }

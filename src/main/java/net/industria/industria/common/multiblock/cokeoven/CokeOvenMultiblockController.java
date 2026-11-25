@@ -4,14 +4,21 @@ import net.industria.industria.Registration;
 import net.industria.industria.common.multiblock.MultiblockModelProperties;
 import net.industria.industria.common.recipe.blast.BlastFurnaceRecipe;
 import net.industria.industria.common.recipe.blast.BlastFurnaceRecipeInput;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -20,10 +27,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class CokeOvenMultiblockController extends BlockEntity {
     private final Set<BlockPos> blocksInMultiblock = new HashSet<>();
@@ -103,9 +107,9 @@ public class CokeOvenMultiblockController extends BlockEntity {
                 setChanged();
             }
 
-            if (maxProgress != recipe.processingTime()) {
+            if (maxProgress != recipe.processingTime() * 2) {
                 progress = 0;
-                maxProgress = recipe.processingTime();
+                maxProgress = recipe.processingTime() * 2;
                 setChanged();
             }
 
@@ -119,6 +123,8 @@ public class CokeOvenMultiblockController extends BlockEntity {
                 if (burnTime > 0) {
 
                     progress++;
+                    makeSound();
+                    spawnParticles();
 
                     if (progress >= maxProgress) {
 
@@ -136,6 +142,42 @@ public class CokeOvenMultiblockController extends BlockEntity {
         if (burnTime > 0) {
             burnTime--;
             setChanged();
+        }
+    }
+
+    private void makeSound() {
+        if (level != null && !level.isClientSide
+                && level.random.nextFloat() < 0.05f) {
+
+            level.playSound(
+                    null,
+                    worldPosition,
+                    SoundEvents.FURNACE_FIRE_CRACKLE,
+                    SoundSource.BLOCKS,
+                    1.0f,
+                    1.0f
+            );
+        }
+    }
+
+    private void spawnParticles() {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+
+        if (level.random.nextFloat() < 0.15f) {
+
+            double x = worldPosition.getX() + level.random.nextDouble() * 2;
+            double y = worldPosition.getY() + 2.05;
+            double z = worldPosition.getZ() + level.random.nextDouble() * 2;
+
+            serverLevel.sendParticles(
+                    ParticleTypes.SMOKE,
+                    x, y, z,
+                    1,       // Particle count
+                    0, 0, 0, // Position spread
+                    0.02     // Speed
+            );
         }
     }
 
@@ -296,5 +338,87 @@ public class CokeOvenMultiblockController extends BlockEntity {
 
             setChanged();
         }
+    }
+
+    private boolean dismantling = false;
+
+    public void dismantle(BlockPos brokenPos) {
+        if (level == null || level.isClientSide || dismantling) {
+            return;
+        }
+
+        dismantling = true;
+
+        dropInventory();
+
+        for (BlockPos pos : blocksInMultiblock) {
+
+            if (pos.equals(brokenPos)
+                    || pos.equals(worldPosition)) {
+                continue;
+            }
+
+            restoreBlock(pos);
+        }
+
+        // Restore the controller last.
+        if (!worldPosition.equals(brokenPos)) {
+            restoreBlock(worldPosition);
+        }
+    }
+
+    private void restoreBlock(BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+
+        if (state.is(Registration.COKE_OVEN_BLOCK.get())
+                || state.is(Registration.COKE_OVEN_CONTROLLER_BLOCK.get())) {
+
+            level.setBlock(
+                    pos,
+                    Registration.COKE_BRICK.get().defaultBlockState(),
+                    Block.UPDATE_ALL
+            );
+        }
+    }
+
+    private void dropInventory() {
+        for (int i = 0; i < items.getSlots(); i++) {
+
+            ItemStack stack = items.getStackInSlot(i).copy();
+
+            if (!stack.isEmpty()) {
+                items.setStackInSlot(i, ItemStack.EMPTY);
+
+                Containers.dropItemStack(
+                        level,
+                        worldPosition.getX() + 0.5,
+                        worldPosition.getY() + 0.5,
+                        worldPosition.getZ() + 0.5,
+                        stack
+                );
+            }
+        }
+    }
+
+
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public int getMaxProgress() {
+        return maxProgress;
+    }
+
+    public int getBurnTime() {
+        return burnTime;
+    }
+
+    public int getMaxBurnTime() {
+        return maxBurnTime;
+    }
+
+    public boolean isBurning() {
+        return burnTime > 0;
     }
 }
