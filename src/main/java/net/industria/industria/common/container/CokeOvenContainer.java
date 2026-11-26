@@ -1,6 +1,6 @@
 package net.industria.industria.common.container;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.industria.industria.common.multiblock.cokeoven.CokeOvenMultiblockController;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;

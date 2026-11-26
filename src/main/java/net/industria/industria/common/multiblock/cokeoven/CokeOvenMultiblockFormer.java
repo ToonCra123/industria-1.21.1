@@ -1,13 +1,12 @@
 package net.industria.industria.common.multiblock.cokeoven;
 
 import net.industria.industria.Industria;
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class CokeOvenMultiblockFormer {

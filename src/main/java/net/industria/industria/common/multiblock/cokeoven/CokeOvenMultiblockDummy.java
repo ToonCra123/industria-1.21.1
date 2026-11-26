@@ -1,7 +1,7 @@
 
 package net.industria.industria.common.multiblock.cokeoven;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.industria.industria.common.multiblock.MultiblockModelProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

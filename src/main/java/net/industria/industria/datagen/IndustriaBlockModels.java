@@ -1,7 +1,7 @@
 package net.industria.industria.datagen;
 
 import net.industria.industria.Industria;
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -19,16 +19,15 @@ public class IndustriaBlockModels extends BlockStateProvider {
         simpleBlock(Registration.COKE_OVEN_CONTROLLER_BLOCK.get(), cokeOvenModel);
         simpleBlock(Registration.STEEL_BLOCK.get());
         simpleBlock(Registration.SILVER_ORE.get());
-
-        var scaffoldingModel = models().cubeBottomTop(
-                "steel_scaffolding",
-                modLoc("block/steel_scaffolding_side"),
-                modLoc("block/steel_scaffolding_top"),
-                modLoc("block/steel_scaffolding_top")
-        ).renderType("minecraft:cutout");
+        simpleBlock(Registration.BASIC_CONTROLLER.get());
         simpleBlockWithItem(
                 Registration.STEEL_SCAFFOLDING.get(),
-                scaffoldingModel
+                models().cubeBottomTop(
+                        "steel_scaffolding",
+                        modLoc("block/steel_scaffolding_side"),
+                        modLoc("block/steel_scaffolding_top"),
+                        modLoc("block/steel_scaffolding_top")
+                ).renderType("minecraft:cutout")
         );
 
     }

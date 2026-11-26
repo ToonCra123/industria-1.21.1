@@ -1,9 +1,9 @@
-package net.industria.industria.compat;
+package net.industria.industria.client.compat;
 
 import mcjty.theoneprobe.api.ITheOneProbe;
 
 import net.industria.industria.Industria;
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

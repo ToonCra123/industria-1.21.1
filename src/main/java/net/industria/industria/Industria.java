@@ -1,6 +1,7 @@
 package net.industria.industria;
 
-import net.industria.industria.compat.TOPCompat;
+import net.industria.industria.client.compat.TOPCompat;
+import net.industria.industria.common.registration.Registration;
 import net.industria.industria.datagen.IndustriaDatagen;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package net.industria.industria.client;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.industria.industria.client.model.SplitModelLoader;
 import net.industria.industria.client.screen.CokeOvenScreen;
 import net.minecraft.resources.ResourceLocation;

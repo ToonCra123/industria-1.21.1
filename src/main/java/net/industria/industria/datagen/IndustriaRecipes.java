@@ -1,6 +1,6 @@
 package net.industria.industria.datagen;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;

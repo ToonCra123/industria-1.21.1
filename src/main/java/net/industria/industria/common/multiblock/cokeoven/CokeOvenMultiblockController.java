@@ -1,10 +1,9 @@
 package net.industria.industria.common.multiblock.cokeoven;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.industria.industria.common.multiblock.MultiblockModelProperties;
 import net.industria.industria.common.recipe.blast.BlastFurnaceRecipe;
 import net.industria.industria.common.recipe.blast.BlastFurnaceRecipeInput;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;

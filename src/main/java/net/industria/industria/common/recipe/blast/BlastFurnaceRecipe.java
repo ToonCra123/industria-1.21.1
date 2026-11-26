@@ -1,6 +1,6 @@
 package net.industria.industria.common.recipe.blast;
 
-import net.industria.industria.Registration;
+import net.industria.industria.common.registration.Registration;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;

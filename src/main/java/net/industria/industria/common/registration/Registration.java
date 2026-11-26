@@ -1,5 +1,6 @@
-package net.industria.industria;
+package net.industria.industria.common.registration;
 
+import net.industria.industria.Industria;
 import net.industria.industria.common.block.CokeBrickBlock;
 import net.industria.industria.common.container.CokeOvenContainer;
 import net.industria.industria.common.item.WrenchItem;
@@ -54,7 +55,9 @@ public class Registration {
     public static final DeferredBlock<CokeBrickBlock> COKE_BRICK = BLOCKS.registerBlock("coke_brick", CokeBrickBlock::new,
             BlockBehaviour.Properties.of().sound(SoundType.DEEPSLATE_BRICKS).explosionResistance(6.0f).strength(2.0f));
     public static final DeferredBlock<Block> STEEL_SCAFFOLDING = BLOCKS.registerBlock("steel_scaffolding", Block::new,
-            BlockBehaviour.Properties.of().noOcclusion());
+            BlockBehaviour.Properties.of().noOcclusion().sound(SoundType.METAL));
+    public static final DeferredBlock<Block> BASIC_CONTROLLER = BLOCKS.registerBlock("basic_controller", Block::new,
+            BlockBehaviour.Properties.of().sound(SoundType.METAL));
     public static final DeferredBlock<Block> STEEL_BLOCK = BLOCKS.registerBlock("steel_block", Block::new,
             BlockBehaviour.Properties.of());
     public static final DeferredBlock<Block> SILVER_ORE = BLOCKS.registerBlock("silver_ore", Block::new,
@@ -65,6 +68,8 @@ public class Registration {
             () -> new BlockItem(COKE_BRICK.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> STELL_SCAFFOLDING_ITEM = ITEMS.register("steel_scaffolding",
             () -> new BlockItem(STEEL_SCAFFOLDING.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> BASIC_CONTROLLER_ITEM = ITEMS.register("basic_controller",
+            () -> new BlockItem(BASIC_CONTROLLER.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> STEEL_BLOCK_ITEM = ITEMS.register("steel_block",
             () -> new BlockItem(STEEL_BLOCK.get(), new Item.Properties()));
     public static final DeferredItem<BlockItem> SILVER_ORE_ITEM = ITEMS.register("silver_ore",
@@ -129,7 +134,9 @@ public class Registration {
                 output.accept(WRENCH.get());
 
                 output.accept(COKE_BRICK_ITEM.get());
+                output.accept(BASIC_CONTROLLER_ITEM.get());
                 output.accept(STELL_SCAFFOLDING_ITEM.get());
+
             }
             ).build());
 
